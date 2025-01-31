@@ -151,6 +151,22 @@ class EnderEmit {
   /// EnderEmit endereco = EnderEmit.fromJson(json);
   /// print(endereco.nro); // Saída: 123
   /// ```
-  factory EnderEmit.fromJson(String source) =>
-      EnderEmit.fromMap(json.decode(source));
+  factory EnderEmit.fromJson(String source) => EnderEmit.fromMap(json.decode(source));
+
+  String format() {
+    String end = "";
+    end += '$xLgr, $nro';
+    end += validaComplemento();
+    end += '\n$xBairro, $xMun - $uF  ';
+    end += '\nCEP: $cEP - $fone';
+    return end;
+  }
+
+  String validaComplemento() {
+    if (xCpl == 'S/C') {
+      return '';
+    } else {
+      return '($xCpl)';
+    }
+  }
 }
