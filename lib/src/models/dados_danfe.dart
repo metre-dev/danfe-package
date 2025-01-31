@@ -127,25 +127,18 @@ class DadosDanfe {
   /// ### Retorno:
   /// - Uma instância de `DadosDanfe` populada com os valores fornecidos no mapa.
   factory DadosDanfe.fromMap(Map<String, dynamic> map) {
-    final List<Det> det = (map['det'] is List)
-        ? List<Det>.from(map['det'].map((x) => Det.fromMap(x)))
-        : [Det.fromMap(map['det'])];
+    final List<Det> det = (map['det'] is List) ? List<Det>.from(map['det'].map((x) => Det.fromMap(x))) : [Det.fromMap(map['det'])];
 
     return DadosDanfe(
       ide: map['ide'] != null ? Ide.fromMap(map['ide']) : null,
       emit: map['emit'] != null ? Emit.fromMap(map['emit']) : null,
-      dest: (map['dest'] != null && map['dest'] != '')
-          ? Dest.fromMap(map['dest'])
-          : null,
+      dest: (map['dest'] != null && map['dest'] != '') ? Dest.fromMap(map['dest']) : null,
       det: map['det'] != null ? det : null,
       total: map['total'] != null ? Total.fromMap(map['total']) : null,
       transp: map['transp'] != null ? Transp.fromMap(map['transp']) : null,
-      pgto: (map['pgto'] ?? map['pag']) != null
-          ? Pgto.fromMap(map['pgto'] ?? map['pag'])
-          : null,
-      infAdic: map['infAdic'] != null ? InfAdic.fromMap(map['infAdic']) : null,
-      chaveNota:
-          (map['_Id'] as String).replaceAll('CFe', '').replaceAll('NFe', ''),
+      pgto: (map['pgto'] ?? map['pag']) != null ? Pgto.fromMap(map['pgto'] ?? map['pag']) : null,
+      infAdic: map['infAdic'] != null && map['infAdic'].runtimeType == Map ? InfAdic.fromMap(map['infAdic']) : null,
+      chaveNota: (map['_Id'] as String).replaceAll('CFe', '').replaceAll('NFe', ''),
       sVersao: map['_versao'],
       sVersaoDadosEnt: map['_versaoDadosEnt'],
       sVersaoSB: map['_versaoSB'],
@@ -166,6 +159,5 @@ class DadosDanfe {
   ///
   /// ### Retorno:
   /// - Uma instância de `DadosDanfe` populada com os valores fornecidos no JSON.
-  factory DadosDanfe.fromJson(String source) =>
-      DadosDanfe.fromMap(json.decode(source));
+  factory DadosDanfe.fromJson(String source) => DadosDanfe.fromMap(json.decode(source));
 }

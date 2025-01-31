@@ -141,18 +141,19 @@ class Danfe {
   /// - Inclui informações suplementares (`infNFeSupl`) e protocolo de autorização (`protNFe`).
   factory Danfe.fromMapNFce(Map<String, dynamic> map) {
     final parseMap = safeGet<Map<String, dynamic>>(map, 'NFe') ?? map;
+    final infNFe = safeGet<Map<String, dynamic>>(parseMap, 'infNFe') ?? map['infNFe'];
     return Danfe(
-      dados: safeGet<Map<String, dynamic>>(parseMap, 'infNFe') != null
-          ? DadosDanfe.fromMap(parseMap['infNFe'])
+      dados: safeGet<Map<String, dynamic>>(parseMap, 'infNFe') != null //
+          ? DadosDanfe.fromMap(infNFe)
           : null,
       tipo: TipoDocumento.NFe,
-      protNFe: safeGet<Map<String, dynamic>>(map, 'protNFe') != null
+      protNFe: safeGet<Map<String, dynamic>>(map, 'protNFe') != null //
           ? ProtNFe.fromMap(map['protNFe'])
           : null,
-      infNFeSupl: safeGet<Map<String, dynamic>>(parseMap, 'infNFeSupl') != null
+      infNFeSupl: safeGet<Map<String, dynamic>>(parseMap, 'infNFeSupl') != null //
           ? InfNFeSupl.fromMap(parseMap['infNFeSupl'])
           : null,
-    )..qrcodePrinter =
+    )..qrcodePrinter = //
         safeGet<Map<String, dynamic>>(parseMap, 'infNFeSupl')?['qrCode'];
   }
 
